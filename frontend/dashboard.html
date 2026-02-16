@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Support Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>All Support Tickets</h2>
+
+<div id="loading" class="loading">
+  Loading tickets...
+</div>
+
+
+<div class="table-wrapper">
+<table border="1" cellpadding="8">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="ticketTable"></tbody>
+</table>
+</div>
+
+<br>
+<a href="index.html">Create New Ticket</a>
+
+<script>
+fetch("../backend/get_tickets.php")
+    .then(response => response.json())
+    .then(data => 
+    {document.getElementById("loading").style.display = "none";
+        let table = document.getElementById("ticketTable");
+
+        data.forEach(ticket => {
+            let row = `
+                <tr>
+                    <td>${ticket.id}</td>
+                    <td>${ticket.title}</td>
+                    <td>${ticket.description}</td>
+                    <td>${ticket.priority}</td>
+                    <td>
+  <span class="${ticket.status === 'Open' ? 'status-open' : 'status-closed'}">
+    ${ticket.status}
+  </span>
+</td>
+
+
+                    <td>
+${
+  ticket.status === "Open"
+    ? `
+      <form action="../backend/update_ticket.php" method="POST" style="display:inline;">
+        <input type="hidden" name="id" value="${ticket.id}">
+        <button class="btn-close" type="submit">Close</button>
+      </form>
+    `
+    : `
+      <form action="../backend/delete_ticket.php" method="POST" 
+            onsubmit="return confirm('Are you sure you want to delete this ticket?');"
+            style="display:inline;">
+        <input type="hidden" name="id" value="${ticket.id}">
+        <button class="btn-delete" type="submit">Delete</button>
+      </form>
+    `
+}
+</td>
+
+                    <td>${ticket.created_at}</td>
+                </tr>
+            `;
+            table.innerHTML += row;
+        });
+    });
+</script>
+</div>
+</body>
+</html>

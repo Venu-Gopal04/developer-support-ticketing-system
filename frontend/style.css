@@ -1,0 +1,225 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* Page background */
+body {
+  margin: 0;
+  background: #f4f6f8;
+  color: #111827;
+}
+
+/* Center page */
+.page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 20px;
+}
+
+/* Card */
+.card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 720px;
+  padding: 32px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Title */
+.card h2 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* Form groups */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #374151;
+}
+
+/* Inputs */
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Textarea */
+textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+/* Button */
+.btn-primary {
+  margin-top: 10px;
+  align-self: flex-start;
+  padding: 12px 20px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.btn-primary:hover {
+  background: #1e40af;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* Link */
+.link {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* ===============================
+   Dashboard Table Styling
+================================ */
+
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+thead {
+  background-color: #f1f5f9;
+}
+
+th, td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* ===============================
+   Status Badges
+================================ */
+
+.status-open {
+  display: inline-block;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #065f46;
+  background-color: #d1fae5;
+  border-radius: 999px;
+}
+
+.status-closed {
+  display: inline-block;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #7f1d1d;
+  background-color: #fee2e2;
+  border-radius: 999px;
+}
+
+/* ===============================
+   Action Buttons
+================================ */
+
+.btn-close {
+  background-color: #ef4444;
+  color: #ffffff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.btn-close:hover {
+  background-color: #dc2626;
+}
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  min-width: 900px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  h2 {
+    font-size: 20px;
+  }
+
+  .container {
+    padding: 20px;
+  }
+}
+.badge {
+  cursor: default;
+}
+
+button {
+  cursor: pointer;
+}
+.btn-delete {
+  background-color: #6b7280;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  background-color: #4b5563;
+}
