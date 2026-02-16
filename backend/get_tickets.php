@@ -1,5 +1,6 @@
 <?php
-include "db.php";
+require_once __DIR__ . "/db.php";
+
 
 $sql = "SELECT * FROM tickets ORDER BY created_at DESC";
 $result = $conn->query($sql);
