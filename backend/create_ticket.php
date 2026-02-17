@@ -1,23 +1,14 @@
 <?php
-require_once __DIR__ . '/db.php';
+require_once "db.php";
 
+$data = json_decode(file_get_contents("php://input"), true);
 
+$title = $data["title"] ?? "";
+$description = $data["description"] ?? "";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+$stmt = $db->prepare(
+    "INSERT INTO tickets (title, description) VALUES (?, ?)"
+);
+$stmt->execute([$title, $description]);
 
-    $title = $_POST['title'];
-    $description = $_POST['description'];
-    $priority = $_POST['priority'];
-
-    $sql = "INSERT INTO tickets (title, description, priority, status)
-            VALUES ('$title', '$description', '$priority', 'Open')";
-
-    if ($conn->query($sql) === TRUE) {
-        // ✅ Redirect after success
-        header("Location: ../frontend/dashboard.html");
-        exit();
-    } else {
-        echo "Error: " . $conn->error;
-    }
-}
-?>
+echo json_encode(["success" => true]);

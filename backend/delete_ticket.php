@@ -1,18 +1,9 @@
 <?php
-require_once __DIR__ . '/db.php';
+require_once "db.php";
 
+$id = $_GET["id"] ?? null;
 
+$stmt = $db->prepare("DELETE FROM tickets WHERE id = ?");
+$stmt->execute([$id]);
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $id = $_POST["id"];
-
-    $sql = "DELETE FROM tickets WHERE id = $id";
-
-    if ($conn->query($sql) === TRUE) {
-        header("Location: ../frontend/dashboard.html");
-        exit();
-    } else {
-        echo "Error deleting ticket: " . $conn->error;
-    }
-}
-?>
+echo json_encode(["success" => true]);

@@ -1,19 +1,14 @@
 <?php
-require_once __DIR__ . '/db.php';
+require_once "db.php";
 
+$data = json_decode(file_get_contents("php://input"), true);
 
+$id = $data["id"];
+$status = $data["status"];
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+$stmt = $db->prepare(
+    "UPDATE tickets SET status = ? WHERE id = ?"
+);
+$stmt->execute([$status, $id]);
 
-    $id = $_POST['id'];
-
-    $sql = "UPDATE tickets SET status='Closed' WHERE id=$id";
-
-    if ($conn->query($sql) === TRUE) {
-        header("Location: ../frontend/dashboard.html");
-        exit();
-    } else {
-        echo "Error updating ticket: " . $conn->error;
-    }
-}
-?>
+echo json_encode(["success" => true]);
