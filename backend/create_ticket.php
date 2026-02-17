@@ -1,14 +1,29 @@
 <?php
-require_once "db.php";
+header('Content-Type: application/json');
 
-$data = json_decode(file_get_contents("php://input"), true);
+$conn = new SQLite3('database.db');
 
-$title = $data["title"] ?? "";
-$description = $data["description"] ?? "";
+$title = $_POST['title'] ?? '';
+$description = $_POST['description'] ?? '';
+$status = $_POST['status'] ?? 'open';
 
-$stmt = $db->prepare(
-    "INSERT INTO tickets (title, description) VALUES (?, ?)"
+if ($title === '' || $description === '') {
+    echo json_encode([
+        "success" => false,
+        "error" => "Title and description are required"
+    ]);
+    exit;
+}
+
+$stmt = $conn->prepare(
+    "INSERT INTO tickets (title, description, status) 
+     VALUES (:title, :description, :status)"
 );
-$stmt->execute([$title, $description]);
+
+$stmt->bindValue(':title', $title, SQLITE3_TEXT);
+$stmt->bindValue(':description', $description, SQLITE3_TEXT);
+$stmt->bindValue(':status', $status, SQLITE3_TEXT);
+
+$result = $stmt->execute();
 
 echo json_encode(["success" => true]);
