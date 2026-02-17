@@ -1,8 +1,6 @@
 <?php
+require_once __DIR__ . '/db.php';
 header('Content-Type: application/json');
-
-$conn = new SQLite3('database.db');
-
 $title = $_POST['title'] ?? '';
 $description = $_POST['description'] ?? '';
 $status = $_POST['status'] ?? 'open';

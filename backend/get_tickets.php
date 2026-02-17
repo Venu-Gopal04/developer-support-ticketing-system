@@ -1,5 +1,5 @@
 <?php
-require_once "db.php";
+require_once __DIR__ . '/db.php';
 
 $stmt = $db->query("SELECT * FROM tickets ORDER BY created_at DESC");
 $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
