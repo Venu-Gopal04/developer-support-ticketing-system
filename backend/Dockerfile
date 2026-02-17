@@ -1,8 +1,15 @@
 FROM php:8.2-apache
 
-RUN docker-php-ext-install mysqli
+# Install SQLite support
+RUN docker-php-ext-install pdo pdo_sqlite
 
-# Copy everything from backend/ (build context) into Apache root
-COPY . /var/www/html/
+# Set Apache root
+WORKDIR /var/www/html
+
+# Copy backend files
+COPY . .
+
+# Fix permissions (important for SQLite file creation)
+RUN chown -R www-data:www-data /var/www/html
 
 EXPOSE 80
